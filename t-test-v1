@@ -1,0 +1,45 @@
+"""
+This program takes in two sets of data and performs a student t-test. 
+We use the 'scipy' and the 'numpy' libraries, so first run the following command
+in the terminal to install them: 
+
+pip3 install numpy scipy
+
+Use pip3 for Python 3
+"""
+
+import numpy as np
+from scipy import stats
+
+"""
+Four inputs are required: 
+(1 and 2): Two data sets
+(3): The number of degrees of freedom (1 is used for sample standard deviation calculation)
+(4): whether there is equal variance (True or False)
+#The output is the mean and standard deviation for each set, and t-test p-value between both sets
+"""
+
+def two_set_stats(data_set_1, data_set_2, dof, eq_var):
+    # Output the mean and the standard deviation of each data set
+    mean1, std1 = np.mean(data_set_1), np.std(data_set_1, ddof=dof)
+    mean2, std2 = np.mean(data_set_2), np.std(data_set_2, ddof=dof)
+    # np.mean() calculates the mean
+    # np.std(ddof=dof) calculates the sample standard deviation
+    # ddof specifies the degrees of freedom
+    
+    # Perform two-sample t-test with equal (True) or unequal (False) variances
+    #Retutn the t-statistic and the p-value
+    t_stat, p_value = stats.ttest_ind(data_set_1, data_set_2, equal_var=eq_var)
+    
+    print(f"Set 1: Mean = {mean1}, Standard Deviation = {std1}")
+    print(f"Set 2: Mean = {mean2}, Standard Deviation = {std2}")
+    print(f"t-statistic: {t_stat}, p-value: {p_value}")
+    
+    return mean1, std1, mean2, std2, t_stat, p_value
+
+
+# Use the function on two data sets (Control and Treatment)
+Control = [1.25, 2.41, 1.62, 0.93, 1.35, 0.14]
+Treatment = [9.21, 8.13, 10.02, 1.80, 12.29, 9.33]
+
+two_set_stats(Control, Treatment, 1, False)
