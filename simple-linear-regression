@@ -1,0 +1,28 @@
+"""
+This function performs a simple linear regression analysis on 
+two continuous variables (one dependent and one independent)
+
+Two inputs:
+First: Independent variable data points (x).
+Second: Dependent variable data points (y).
+
+Output:
+Slope, intercept, r-value, p-value, and standard error of the analysis
+"""
+
+import numpy as np
+from scipy import stats
+
+def lin_reg(x, y):
+    slope, intercept, r_val, p_val, std_err = stats.linregress(x, y)
+    print(f"The slope is: {slope}")
+    print(f"The y-intercept is: {intercept}")
+    print(f"The r-value is: {r_val}")
+    print(f"The p-value is: {p_val}")
+    print(f"The standard error is: {std_err}")
+    return slope, intercept, r_val, p_val, std_err
+
+#Example
+DAYPW = [0, 1, 2, 3, 4]
+AVGPMNREC = [0.12, 5.24, 5.32, 4.38, 3.29]
+lin_reg(DAYPW, AVGPMNREC)
