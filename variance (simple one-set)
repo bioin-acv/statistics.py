@@ -1,0 +1,14 @@
+""""
+This function calculates the viariance of a given data set using the buil-in np.var function
+Input: a list of numbers and the degrees of freedom
+"""
+
+import numpy as np
+
+def data_variance(data_set, dof):
+    variance = np.var(data_set, ddof=dof)
+    return print(f"The variance of the dataset is: {variance}")
+
+# Example usage
+D1PMN = [0.09, 0.12, 2.32, 2.30, 0.16, 0.21, 2.16, 0.02]
+  variance = data_variance(D1PMN, 0)
