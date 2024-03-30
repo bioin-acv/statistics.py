@@ -1,0 +1,35 @@
+"""
+This functions uses the f_oneway function from the stats library to 
+perform a one-way ANOVA analysis on three datasets.
+
+Inputs:
+- Three datasets (list or numpy arrays)
+
+Outputs:
+- The calculated f-statistic
+- The p-value indicating the probability of observing 
+  the data if the null hypothesis is true.
+- Statement interpreting the p-value
+ """
+
+import numpy as np
+from scipy import stats
+
+def one_way_anova(set1, set2, set3):
+    f_statistic, p_value = stats.f_oneway(set1, set2, set3)
+    print(f"The f-statistic is: {f_statistic}")
+    print(f"The p-value is: {p_value}")
+    if p_value < 0.05:
+        print("There is a statistically significant difference between the group means.")
+        return f_statistic, p_value
+    else:
+        print("There is no statistically significant difference between the group means.")
+        return f_statistic, p_value
+
+
+#Example
+SALINE = np.array([0.3, 1.1, 1.0, 0.9, 0.2])
+SAUR = np.array([3.2, 3.9, 3.7, 1.9, 2.8])
+PAER = np.array([10.8, 12.0, 12.6, 11.9, 12.5])
+
+one_way_anova(SALINE, SAUR, PAER)
